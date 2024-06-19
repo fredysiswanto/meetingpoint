@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meeting Point</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+      }
+
+      .overlay {
+        background-color: rgba(0, 0, 0, 0.1); /* Efek gelap latar belakang */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        z-index: 1; /* Menempatkan konten di atas latar belakang */
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-bottom: 10px;
+        color: #fff; /* Warna teks */
+        background-color: rgba(0, 0, 0, 0.5); /* Efek gelap latar belakang */
+        border-radius: 5px;
+      }
+      a {
+        display: block;
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #fff; /* Warna teks */
+        background-color: rgba(0, 0, 0, 0.5); /* Efek gelap latar belakang */
+        border-radius: 5px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .countdown-item {
+        margin: 0 10px;
+        font-size: 2em;
+        color: #fff; /* Warna teks countdown */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.5
+        ); /* Warna latar belakang countdown */
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+
+      .countdown-label {
+        font-size: 1.2em;
+        color: #fff; /* Warna teks label countdown */
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .countdown-label span {
+        width: 80px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay">
+      <div class="container">
+        <h1>Coming Soon</h1>
+        <a href="#">www.meetingpoint.cyou</a>
+        <div id="countdown" class="countdown">
+          <div class="countdown-item" id="days">00</div>
+          <div class="countdown-item" id="hours">00</div>
+          <div class="countdown-item" id="minutes">00</div>
+          <div class="countdown-item" id="seconds">00</div>
+        </div>
+        <div class="countdown-label">
+          <span>Days</span>
+          <span>Hours</span>
+          <span>Minutes</span>
+          <span>Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Set the background image using JavaScript
+      function getRandomNumber() {
+        return Math.floor(Math.random() * 6) + 1;
+      }
+      var backgroundUrl = `/src/img/bg_0${getRandomNumber()}.jpg`; // Ganti dengan URL gambar background Anda
+      const ele = (document.getElementsByTagName(
+        'body'
+      )[0].style.backgroundImage = 'url(' + backgroundUrl + ')');
+      // Set the date we're counting down to
+      var countDownDate = new Date('Aug 1, 2024 00:00:00').getTime();
+
+      // Update the countdown every 1 second
+      var x = setInterval(function () {
+        // Get current date and time
+        var now = new Date().getTime();
+
+        // Calculate the distance between now and the countdown date
+        var distance = countDownDate - now;
+
+        // Calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the elements with corresponding ids
+        document.getElementById('days').innerHTML = formatTime(days);
+        document.getElementById('hours').innerHTML = formatTime(hours);
+        document.getElementById('minutes').innerHTML = formatTime(minutes);
+        document.getElementById('seconds').innerHTML = formatTime(seconds);
+      }, 1000);
+
+      // Function to add leading zero if the number is less than 10
+      function formatTime(time) {
+        return time < 10 ? `0${time}` : time;
+      }
+    </script>
+  </body>
+</html>
